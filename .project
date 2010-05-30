@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ConnectorFishtext</name>
+	<name>websms-connector-fishtext</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -36,4 +36,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>websmsAPI</name>
+			<type>2</type>
+			<locationURI>_android_websmsAPI/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
