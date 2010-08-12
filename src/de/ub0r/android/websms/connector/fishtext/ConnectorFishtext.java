@@ -164,7 +164,7 @@ public class ConnectorFishtext extends Connector {
 		postData.add(new BasicNameValuePair("rememberSession", "yes"));
 
 		HttpResponse response = Utils.getHttpClient(URL_LOGIN, cookies,
-				postData, TARGET_AGENT, null);
+				postData, TARGET_AGENT, null, false);
 		postData = null;
 		int resp = response.getStatusLine().getStatusCode();
 		if (resp != HttpURLConnection.HTTP_OK) {
@@ -210,8 +210,6 @@ public class ConnectorFishtext extends Connector {
 	 *            throw exception on fail, if false a fresh session is loaded
 	 *            for retry
 	 * @return messageID
-	 * @throws WebSMSException
-	 *             WebSMSException
 	 * @throws IOException
 	 *             IOException
 	 * @throws URISyntaxException
@@ -221,13 +219,14 @@ public class ConnectorFishtext extends Connector {
 	 */
 	private String getMessageID(final Context context,
 			final ConnectorCommand command, final ArrayList<Cookie> cookies,
-			final boolean throwOnFail) throws WebSMSException, IOException,
+			final boolean throwOnFail) throws IOException,
 			MalformedCookieException, URISyntaxException {
 		if (cookies.size() == 0) {
 			this.doLogin(context, command, cookies);
 		}
 		final HttpResponse response = Utils.getHttpClient(URL_PRESEND, cookies,
-				new ArrayList<BasicNameValuePair>(0), TARGET_AGENT, URL_LOGIN);
+				new ArrayList<BasicNameValuePair>(0), TARGET_AGENT, URL_LOGIN,
+				false);
 		final int resp = response.getStatusLine().getStatusCode();
 		if (resp != HttpURLConnection.HTTP_OK) {
 			throw new WebSMSException(context, R.string.error_http, "" + resp);
@@ -281,8 +280,6 @@ public class ConnectorFishtext extends Connector {
 	 *            {@link ConnectorCommand}
 	 * @param cookies
 	 *            {@link Cookie}s
-	 * @throws WebSMSException
-	 *             WebSMSException
 	 * @throws IOException
 	 *             IOException
 	 * @throws URISyntaxException
@@ -292,8 +289,7 @@ public class ConnectorFishtext extends Connector {
 	 */
 	private void sendText(final Context context,
 			final ConnectorCommand command, final ArrayList<Cookie> cookies)
-			throws WebSMSException, IOException, MalformedCookieException,
-			URISyntaxException {
+			throws IOException, MalformedCookieException, URISyntaxException {
 		ArrayList<BasicNameValuePair> postData = // .
 		new ArrayList<BasicNameValuePair>(NUM_VARS_SEND);
 		postData.add(new BasicNameValuePair("action", "Send"));
@@ -308,7 +304,7 @@ public class ConnectorFishtext extends Connector {
 				cookies, false), command.getText()));
 
 		HttpResponse response = Utils.getHttpClient(URL_SEND, cookies,
-				postData, TARGET_AGENT, URL_LOGIN);
+				postData, TARGET_AGENT, URL_LOGIN, false);
 		postData = null;
 		final int resp = response.getStatusLine().getStatusCode();
 		if (resp != HttpURLConnection.HTTP_OK) {
@@ -332,8 +328,7 @@ public class ConnectorFishtext extends Connector {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected final void doUpdate(final Context context, final Intent intent)
-			throws WebSMSException {
+	protected final void doUpdate(final Context context, final Intent intent) {
 		try {
 			synchronized (SYNC) {
 				ArrayList<Cookie> cookies = new ArrayList<Cookie>();
@@ -354,8 +349,7 @@ public class ConnectorFishtext extends Connector {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	protected final void doSend(final Context context, final Intent intent)
-			throws WebSMSException {
+	protected final void doSend(final Context context, final Intent intent) {
 		try {
 			synchronized (SYNC) {
 				ArrayList<Cookie> cookies;
