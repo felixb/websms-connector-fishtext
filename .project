@@ -38,7 +38,7 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>websmsAPI</name>
+			<name>websmsAPI_src</name>
 			<type>2</type>
 			<locationURI>_android_websmsAPI/src</locationURI>
 		</link>
