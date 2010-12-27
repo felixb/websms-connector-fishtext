@@ -174,6 +174,7 @@ public class ConnectorFishtext extends Connector {
 				if (b.startsWith("&euro;")) {
 					b = b.substring(6) + "\u20AC";
 				}
+				b.replaceAll("&pound; *", "\u00A3");
 				Log.d(TAG, "balance: " + b);
 				this.getSpec(context).setBalance(b);
 			}
