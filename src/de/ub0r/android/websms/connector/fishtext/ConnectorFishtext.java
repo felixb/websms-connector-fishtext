@@ -45,7 +45,9 @@ import de.ub0r.android.websms.connector.common.ConnectorSpec.SubConnectorSpec;
 public class ConnectorFishtext extends Connector {
 	/** Tag for output. */
 	private static final String TAG = "fishtext";
-	/** {@link SubConnectorSpec} ID: basic. */
+
+	/** Preference's name: Use default number for login. */
+	private static final String PREFS_LOGIN_WTIH_DEFAULT = "login_with_default";
 
 	/** Fishtext URL: login. */
 	private static final String URL_LOGIN = // .
@@ -142,8 +144,13 @@ public class ConnectorFishtext extends Connector {
 		ArrayList<BasicNameValuePair> postData = // .
 		new ArrayList<BasicNameValuePair>(NUM_VARS_LOGIN);
 		postData.add(new BasicNameValuePair("action", "login"));
-		postData.add(new BasicNameValuePair("mobile", Utils.getSender(context,
-				command.getDefSender())));
+		if (p.getBoolean(PREFS_LOGIN_WTIH_DEFAULT, false)) {
+			postData.add(new BasicNameValuePair("mobile", command
+					.getDefSender()));
+		} else {
+			postData.add(new BasicNameValuePair("mobile", Utils.getSender(
+					context, command.getDefSender())));
+		}
 		postData.add(new BasicNameValuePair("password", p.getString(
 				Preferences.PREFS_PASSWORD, "")));
 		postData.add(new BasicNameValuePair("rememberSession", "yes"));

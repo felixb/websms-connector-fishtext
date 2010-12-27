@@ -20,4 +20,6 @@
 	<string name="enable_fishtext">Aktiviere fishtext</string>
 	<string name="settings_fishtext">Einstellungen - fishtext</string>
 	<string name="partner_fishtext_hint">Neuen fishtext.de Account anlegen</string>
+	<string name="use_default_for_login_">Mit std. Nummer einloggen</string>
+	<string name="use_default_for_login_hint">Standard Nummer zum Login verwenden.</string>
 </resources>

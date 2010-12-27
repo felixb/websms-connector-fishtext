@@ -31,4 +31,7 @@
 		android:inputType="phone" android:title="@string/custom_sender_"
 		android:dialogTitle="@string/custom_sender_" android:summary="@string/sender_hint"
 		android:dependency="use_default_sender" />
+	<CheckBoxPreference android:key="login_with_default"
+		android:title="@string/use_default_for_login_" android:summary="@string/use_default_for_login_hint"
+		android:dependency="use_default_sender" />
 </PreferenceScreen>
