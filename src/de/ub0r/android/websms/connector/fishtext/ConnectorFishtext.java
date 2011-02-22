@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Felix Bechstein
+ * Copyright (C) 2010-2011 Felix Bechstein
  * 
  * This file is part of WebSMS.
  * 
@@ -144,13 +144,22 @@ public class ConnectorFishtext extends Connector {
 		ArrayList<BasicNameValuePair> postData = // .
 		new ArrayList<BasicNameValuePair>(NUM_VARS_LOGIN);
 		postData.add(new BasicNameValuePair("action", "login"));
+		String genlogin;
 		if (p.getBoolean(PREFS_LOGIN_WTIH_DEFAULT, false)) {
-			postData.add(new BasicNameValuePair("mobile", command
-					.getDefSender()));
+			genlogin = command.getDefSender();
 		} else {
-			postData.add(new BasicNameValuePair("mobile", Utils.getSender(
-					context, command.getDefSender())));
+			genlogin = Utils.getSender(context, command.getDefSender());
 		}
+		Log.d(TAG, "genlogin:  " + genlogin);
+		if (genlogin.startsWith("+")) {
+			genlogin = genlogin.substring(1);
+		} else if (genlogin.startsWith("00")) {
+			genlogin = genlogin.substring(2);
+		}
+		Log.d(TAG, "genlogin:  " + genlogin);
+		// postData.add(new BasicNameValuePair("mobile", userlogin));
+		postData.add(new BasicNameValuePair("mobile", genlogin));
+		Log.d(TAG, "genlogin:  " + genlogin);
 		postData.add(new BasicNameValuePair("password", p.getString(
 				Preferences.PREFS_PASSWORD, "")));
 		postData.add(new BasicNameValuePair("rememberSession", "yes"));
