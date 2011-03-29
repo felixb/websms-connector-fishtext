@@ -66,15 +66,6 @@ public class ConnectorFishtext extends Connector {
 	/** Check for sent. */
 	private static final String CHECK_SENT = "Message sent";
 
-	/** Stip bytes from stream: login. */
-	private static final int STRIP_LOGIN_START = 4500;
-	/** Stip bytes from stream: login. */
-	private static final int STRIP_LOGIN_END = 6500;
-	/** Stip bytes from stream: presend. */
-	// private static final int STRIP_PRESEND_START = 1000;
-	/** Stip bytes from stream: presend. */
-	// private static final int STRIP_PRESEND_END = 3000;
-
 	/** Number of vars pushed at login. */
 	private static final int NUM_VARS_LOGIN = 4;
 	/** Number of vars pushed at send. */
@@ -172,7 +163,7 @@ public class ConnectorFishtext extends Connector {
 			throw new WebSMSException(context, R.string.error_http, "" + resp);
 		}
 		final String htmlText = Utils.stream2str(response.getEntity()
-				.getContent(), STRIP_LOGIN_START, STRIP_LOGIN_END);
+				.getContent());
 		Log.d(TAG, "----HTTP RESPONSE---");
 		Log.d(TAG, htmlText);
 		Log.d(TAG, "----HTTP RESPONSE---");
