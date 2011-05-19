@@ -45,6 +45,8 @@ import de.ub0r.android.websms.connector.common.ConnectorSpec.SubConnectorSpec;
 public class ConnectorFishtext extends Connector {
 	/** Tag for output. */
 	private static final String TAG = "fishtext";
+	/** Google's ad unit id. */
+	private static final String AD_UNITID = "a14dd50c927d383";
 
 	/** Preference's name: Use default number for login. */
 	private static final String PREFS_LOGIN_WTIH_DEFAULT = "login_with_default";
@@ -88,6 +90,7 @@ public class ConnectorFishtext extends Connector {
 		ConnectorSpec c = new ConnectorSpec(name);
 		c.setAuthor(// .
 				context.getString(R.string.connector_fishtext_author));
+		c.setAdUnitId(AD_UNITID);
 		c.setBalance(null);
 		c.setCapabilities(ConnectorSpec.CAPABILITIES_UPDATE
 				| ConnectorSpec.CAPABILITIES_SEND
