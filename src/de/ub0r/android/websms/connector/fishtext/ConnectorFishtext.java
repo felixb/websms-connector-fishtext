@@ -306,6 +306,8 @@ public class ConnectorFishtext extends Connector {
 	 */
 	@Override
 	protected final void doUpdate(final Context context, final Intent intent) {
+		Utils.showUpdateNotification(context,
+				"com.fairmichael.fintan.websms.connector.fishtext");
 		try {
 			this.doLogin(context, new ConnectorCommand(intent));
 		} catch (IOException e) {
@@ -319,6 +321,8 @@ public class ConnectorFishtext extends Connector {
 	 */
 	@Override
 	protected final void doSend(final Context context, final Intent intent) {
+		Utils.showUpdateNotification(context,
+				"com.fairmichael.fintan.websms.connector.fishtext");
 		try {
 			this.sendText(context, new ConnectorCommand(intent));
 		} catch (IOException e) {
